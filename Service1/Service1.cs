@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using SupportLibrary;
+using System.Configuration;
 
 namespace Service1
 {
@@ -23,23 +24,47 @@ namespace Service1
         {
             InitializeComponent();
             _fileName = AppDomain.CurrentDomain.BaseDirectory + "\\LogFile_Service1.txt";
-
+            
+            //set service can pause and resume
+            this.CanPauseAndContinue = true;
             try
             {
+                var appSettings = ConfigurationManager.AppSettings;
+
+                //default name
+                string eventSourceName = "MySource";
+                string logName = "MyNewLog";
+                //get config from file
+                string value = "";
+                value = appSettings["EventSourceName"];
+                if (value.Length != 0)
+                    eventSourceName = value;
+                value = appSettings["EventLogName"];
+                if (value.Length != 0)
+                    logName = value;
+
+                bool isDeleteEventFirst = false;
+                value = appSettings["EventRecreate"];
+                if (Convert.ToBoolean(value))
+                    isDeleteEventFirst = true;
+
                 //clean up
-                //if (System.Diagnostics.EventLog.SourceExists("MySource"))
-                //{
-                //    System.Diagnostics.EventLog.DeleteEventSource("MySource");
-                //}
+                if (isDeleteEventFirst)
+                {
+                    if (System.Diagnostics.EventLog.SourceExists(eventSourceName))
+                    {
+                        System.Diagnostics.EventLog.DeleteEventSource(eventSourceName);
+                    }
+                }
                 //create if not exist
-                if (!System.Diagnostics.EventLog.SourceExists("MySource"))
+                if (!System.Diagnostics.EventLog.SourceExists(eventSourceName))
                 {
                     System.Diagnostics.EventLog.CreateEventSource(
-                        "MySource", "MyNewLog");
+                        eventSourceName, logName);
                 }
                 eventLog1 = new System.Diagnostics.EventLog();
-                eventLog1.Source = "MySource";
-                eventLog1.Log = "MyNewLog";
+                eventLog1.Source = eventSourceName;
+                eventLog1.Log = logName;
 
                 SupportLibrary.UtilityHelpers.WriteLog(_fileName, "initialed EventLog");
             }
@@ -53,11 +78,9 @@ namespace Service1
         protected override void OnStart(string[] args)
         {
             timer1 = new Timer();
-            this.timer1.Interval = 5000;//5sec
+            this.timer1.Interval = 3000;//3sec
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
             this.timer1.Enabled = true;
-
-
 
             if (Environment.UserInteractive)
             {
@@ -88,6 +111,22 @@ namespace Service1
             // write an entry to the log
             eventLog1.WriteEntry("In OnStop.");
         }
+
+        protected override void OnContinue()
+        {
+            //continue the work
+            //enable the timer
+            this.timer1.Enabled = true;
+            eventLog1.WriteEntry("In OnContinue.");
+        }
+
+        protected override void OnPause()
+        {
+            //pause works
+            //stop the timer
+            this.timer1.Enabled = false;
+            eventLog1.WriteEntry("OnPause.");
+        }  
 
         private void timer1_Tick(object sender, ElapsedEventArgs e)
         {

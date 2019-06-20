@@ -39,8 +39,9 @@
             // 
             // serviceInstaller1
             // 
-            this.serviceInstaller1.ServiceName = "My Test Service1";
             this.serviceInstaller1.Description = "This is test service 1";
+            this.serviceInstaller1.ServiceName = "My Test Service1";
+            this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller
             // 
