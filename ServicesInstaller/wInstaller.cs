@@ -34,6 +34,8 @@ namespace ServicesInstaller
 
         private void wInstaller_Shown(object sender, EventArgs e)
         {
+            this.CenterToScreen();
+
             string version = System.Windows.Forms.Application.ProductVersion;
             this.lblInstallerVersion.Text = String.Format("Version:{0}", version);
 

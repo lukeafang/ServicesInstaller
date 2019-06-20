@@ -79,6 +79,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>@echo Pre-build command line Start
+@echo Copy Service1
+xcopy $(SolutionDir)Service1\$(OutDir)*.exe $(TargetDir) /y/d
+xcopy $(SolutionDir)Service1\$(OutDir)*.exe.config $(TargetDir) /y/d
+xcopy $(SolutionDir)Service1\$(OutDir)*.pdb $(TargetDir) /y/d
+xcopy $(SolutionDir)Service1\$(OutDir)*.dll $(TargetDir) /y/d
+@echo Pre-build command line End</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -30,6 +30,10 @@ namespace Service1
             try
             {
                 var appSettings = ConfigurationManager.AppSettings;
+                if (appSettings == null)
+                {
+                    SupportLibrary.UtilityHelpers.WriteLog(_fileName, "appSettings == null");
+                }
 
                 //default name
                 string eventSourceName = "MySource";
@@ -45,8 +49,10 @@ namespace Service1
 
                 bool isDeleteEventFirst = false;
                 value = appSettings["EventRecreate"];
-                if (Convert.ToBoolean(value))
+                if(Convert.ToInt32(value) == 1)
+                {
                     isDeleteEventFirst = true;
+                }
 
                 //clean up
                 if (isDeleteEventFirst)
