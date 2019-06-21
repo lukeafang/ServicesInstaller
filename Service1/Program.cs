@@ -33,6 +33,11 @@ namespace Service1
                             {
                                 case "-install":
                                     System.Configuration.Install.ManagedInstallerClass.InstallHelper(new string[] { System.Reflection.Assembly.GetExecutingAssembly().Location });
+                                    System.Diagnostics.EventLog eventLog1 = new System.Diagnostics.EventLog();
+                                    var appSettings = System.Configuration.ConfigurationManager.AppSettings;
+                                    eventLog1.Source = appSettings["EventSourceName"];
+                                    eventLog1.Log = appSettings["EventLogName"];
+                                    eventLog1.WriteEntry("Service installed.");
                                     break;
                                 case "-uninstall":
                                     System.Configuration.Install.ManagedInstallerClass.InstallHelper(new string[] { "/u", System.Reflection.Assembly.GetExecutingAssembly().Location });
@@ -48,6 +53,15 @@ namespace Service1
                     }
                     else
                     {
+                        var appSettings = System.Configuration.ConfigurationManager.AppSettings;
+                        string eventSourceName = appSettings["EventSourceName"];
+                        string logName = appSettings["EventLogName"];
+                        if (!System.Diagnostics.EventLog.SourceExists(eventSourceName))
+                        {
+                            System.Diagnostics.EventLog.CreateEventSource(
+                                eventSourceName, logName);
+                        }
+
                         Service1 service = new Service1();
                         service.TestStartupAndStop(args);
                     }

@@ -24,11 +24,16 @@ namespace Service1
         {
             InitializeComponent();
             _fileName = AppDomain.CurrentDomain.BaseDirectory + "\\LogFile_Service1.txt";
-            
+
             //set service can pause and resume
             this.CanPauseAndContinue = true;
             try
             {
+                //eventLog1 = new EventLog(logName, ".", eventSourceName);
+                eventLog1 = new System.Diagnostics.EventLog();
+                //must set AutoLog to false in order to use a custom log.
+                this.AutoLog = false;
+
                 var appSettings = ConfigurationManager.AppSettings;
                 if (appSettings == null)
                 {
@@ -47,28 +52,31 @@ namespace Service1
                 if (value.Length != 0)
                     logName = value;
 
-                bool isDeleteEventFirst = false;
-                value = appSettings["EventRecreate"];
-                if(Convert.ToInt32(value) == 1)
-                {
-                    isDeleteEventFirst = true;
-                }
+                //bool isDeleteEventFirst = false;
+                //value = appSettings["EventRecreate"];
+                //if (Convert.ToInt32(value) == 1)
+                //{
+                //    isDeleteEventFirst = true;
+                //}
 
                 //clean up
-                if (isDeleteEventFirst)
-                {
-                    if (System.Diagnostics.EventLog.SourceExists(eventSourceName))
-                    {
-                        System.Diagnostics.EventLog.DeleteEventSource(eventSourceName);
-                    }
-                }
+                //if (isDeleteEventFirst)
+                //{
+                //    if (System.Diagnostics.EventLog.SourceExists(eventSourceName))
+                //    {
+                //        System.Diagnostics.EventLog.DeleteEventSource(eventSourceName);
+                //        System.Diagnostics.EventLog.Delete(logName);
+                //    }
+                //}
+
                 //create if not exist
-                if (!System.Diagnostics.EventLog.SourceExists(eventSourceName))
-                {
-                    System.Diagnostics.EventLog.CreateEventSource(
-                        eventSourceName, logName);
-                }
-                eventLog1 = new System.Diagnostics.EventLog();
+                //if (!System.Diagnostics.EventLog.SourceExists(eventSourceName))
+                //{
+                //    System.Diagnostics.EventLog.CreateEventSource(
+                //        eventSourceName, logName);
+                //}
+
+
                 eventLog1.Source = eventSourceName;
                 eventLog1.Log = logName;
 
@@ -98,6 +106,8 @@ namespace Service1
                 SupportLibrary.UtilityHelpers.WriteLog(_fileName, "Service_1 running");
             }
             // write an entry to the log
+            var appSettings = ConfigurationManager.AppSettings;
+            eventLog1.Log = appSettings["EventLogName"];
             eventLog1.WriteEntry("In OnStart.");
         }
 
