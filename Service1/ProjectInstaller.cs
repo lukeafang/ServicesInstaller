@@ -18,9 +18,14 @@ namespace Service1
 
             var appSettings = System.Configuration.ConfigurationManager.AppSettings;
 
+            //setting serviceName
+            this.serviceInstaller1.ServiceName = appSettings["ServiceName"];
+            this.serviceInstaller1.DisplayName = appSettings["ServiceDisplayName"];
+            this.serviceInstaller1.Description = appSettings["ServiceDesc"];
+
+
             string eventSourceName = appSettings["EventSourceName"];
             string logName = appSettings["EventLogName"];
-
             EventLogInstaller EventLogInstall = null;
             foreach (Installer I in this.serviceInstaller1.Installers)
             {

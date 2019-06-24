@@ -13,28 +13,38 @@ namespace ServicesInstaller
 {
     public partial class wInstaller : Form
     {
-        private List<string> _serviceNameList;
-        private string _selectServiceName;
+        private List<string> _serviceExecutionNameList;
+        private string _selectServiceExecutionName;
+        private ServiceInfo _serviceInfo;
 
         public wInstaller()
         {
             InitializeComponent();
-            _selectServiceName = "";
-
+            _selectServiceExecutionName = "";
+            _serviceInfo = null;
         }
 
         private void cbServiceName_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            string name = cbServiceName.SelectedItem.ToString();
+            if (name.CompareTo(_selectServiceExecutionName) != 0)
+            {
+                _selectServiceExecutionName = name;
+                updateUIValue();
+            }
         }
 
         private void btnServiceInstall_Click(object sender, EventArgs e)
         {
+            if (_serviceInfo == null) { return; }
+
 
         }
 
         private void btnServiceUninstall_Click(object sender, EventArgs e)
         {
+            if (_serviceInfo == null) { return; }
+
 
         }
 
@@ -45,10 +55,10 @@ namespace ServicesInstaller
             string version = System.Windows.Forms.Application.ProductVersion;
             this.lblInstallerVersion.Text = String.Format("Version:{0}", version);
 
-            _serviceNameList = getServiceFileNames();
+            _serviceExecutionNameList = getServiceFileNames();
 
             cbServiceName.Items.Clear();
-            foreach (string serviceName in _serviceNameList)
+            foreach (string serviceName in _serviceExecutionNameList)
             {
                 cbServiceName.Items.Add(serviceName);
             }
@@ -56,7 +66,7 @@ namespace ServicesInstaller
             if (cbServiceName.Items.Count > 0)
             {
                 cbServiceName.SelectedIndex = 0;
-                _selectServiceName = cbServiceName.Items[0].ToString();
+                _selectServiceExecutionName = cbServiceName.Items[0].ToString();
             }
 
             updateUIValue();
@@ -86,8 +96,35 @@ namespace ServicesInstaller
 
         private void updateUIValue()
         {
+            //clean text
+            _serviceInfo = null;
+            this.txtServiceVersion.Text = "";
+            this.txtServiceInstalled.Text = "";
+            this.txtServiceStatus.Text = "";
+            this.txtServiceInstalledVersion.Text = "";
+            this.txtServiceInstalledPath.Text = "";
+            if (_selectServiceExecutionName.Length == 0) { return; }
+            
+            _serviceInfo = new ServiceInfo();
+            string configFilePath = AppDomain.CurrentDomain.BaseDirectory + _selectServiceExecutionName + ".exe.config";
+            if (_serviceInfo.LoadServiceInfo(AppDomain.CurrentDomain.BaseDirectory, _selectServiceExecutionName) == false) { return; }
 
+            this.txtServiceVersion.Text = _serviceInfo.ServiceVersion;
 
+            if (_serviceInfo.IsInstalled == true)
+            {
+                this.txtServiceInstalled.Text = "True";
+                this.txtServiceStatus.Text = _serviceInfo.ServiceInstalledStatus;
+                this.txtServiceInstalledVersion.Text = _serviceInfo.ServiceInstalledVersion;
+                this.txtServiceInstalledPath.Text = _serviceInfo.ServiceInstalledPath;
+            }
+            else
+            {
+                this.txtServiceInstalled.Text = "False";
+                this.txtServiceStatus.Text = "";
+                this.txtServiceInstalledVersion.Text = "";
+                this.txtServiceInstalledPath.Text = "";
+            }
         }
     }
 }

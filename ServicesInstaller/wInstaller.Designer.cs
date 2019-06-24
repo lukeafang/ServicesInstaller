@@ -37,6 +37,12 @@
             this.btnServiceUninstall = new System.Windows.Forms.Button();
             this.txtServiceStatus = new System.Windows.Forms.TextBox();
             this.lblServiceStatus = new System.Windows.Forms.Label();
+            this.txtServiceInstalled = new System.Windows.Forms.TextBox();
+            this.lblServiceInstalled = new System.Windows.Forms.Label();
+            this.txtServiceInstalledVersion = new System.Windows.Forms.TextBox();
+            this.lblServiceInstalledVersion = new System.Windows.Forms.Label();
+            this.txtServiceInstalledPath = new System.Windows.Forms.TextBox();
+            this.lblServiceInstalledPath = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblServiceName
@@ -69,16 +75,16 @@
             // 
             // txtServiceVersion
             // 
-            this.txtServiceVersion.Enabled = false;
             this.txtServiceVersion.Location = new System.Drawing.Point(99, 44);
             this.txtServiceVersion.Name = "txtServiceVersion";
+            this.txtServiceVersion.ReadOnly = true;
             this.txtServiceVersion.Size = new System.Drawing.Size(100, 20);
             this.txtServiceVersion.TabIndex = 3;
             // 
             // lblInstallerVersion
             // 
             this.lblInstallerVersion.AutoSize = true;
-            this.lblInstallerVersion.Location = new System.Drawing.Point(13, 279);
+            this.lblInstallerVersion.Location = new System.Drawing.Point(12, 352);
             this.lblInstallerVersion.Name = "lblInstallerVersion";
             this.lblInstallerVersion.Size = new System.Drawing.Size(56, 13);
             this.lblInstallerVersion.TabIndex = 4;
@@ -86,7 +92,7 @@
             // 
             // btnServiceInstall
             // 
-            this.btnServiceInstall.Location = new System.Drawing.Point(19, 111);
+            this.btnServiceInstall.Location = new System.Drawing.Point(19, 261);
             this.btnServiceInstall.Name = "btnServiceInstall";
             this.btnServiceInstall.Size = new System.Drawing.Size(88, 37);
             this.btnServiceInstall.TabIndex = 5;
@@ -96,7 +102,7 @@
             // 
             // btnServiceUninstall
             // 
-            this.btnServiceUninstall.Location = new System.Drawing.Point(113, 111);
+            this.btnServiceUninstall.Location = new System.Drawing.Point(113, 261);
             this.btnServiceUninstall.Name = "btnServiceUninstall";
             this.btnServiceUninstall.Size = new System.Drawing.Size(88, 37);
             this.btnServiceUninstall.TabIndex = 6;
@@ -106,26 +112,83 @@
             // 
             // txtServiceStatus
             // 
-            this.txtServiceStatus.Enabled = false;
-            this.txtServiceStatus.Location = new System.Drawing.Point(99, 70);
+            this.txtServiceStatus.Location = new System.Drawing.Point(99, 96);
             this.txtServiceStatus.Name = "txtServiceStatus";
+            this.txtServiceStatus.ReadOnly = true;
             this.txtServiceStatus.Size = new System.Drawing.Size(100, 20);
             this.txtServiceStatus.TabIndex = 8;
             // 
             // lblServiceStatus
             // 
             this.lblServiceStatus.AutoSize = true;
-            this.lblServiceStatus.Location = new System.Drawing.Point(53, 70);
+            this.lblServiceStatus.Location = new System.Drawing.Point(53, 96);
             this.lblServiceStatus.Name = "lblServiceStatus";
             this.lblServiceStatus.Size = new System.Drawing.Size(40, 13);
             this.lblServiceStatus.TabIndex = 7;
             this.lblServiceStatus.Text = "Status:";
             // 
+            // txtServiceInstalled
+            // 
+            this.txtServiceInstalled.Location = new System.Drawing.Point(99, 70);
+            this.txtServiceInstalled.Name = "txtServiceInstalled";
+            this.txtServiceInstalled.ReadOnly = true;
+            this.txtServiceInstalled.Size = new System.Drawing.Size(100, 20);
+            this.txtServiceInstalled.TabIndex = 10;
+            // 
+            // lblServiceInstalled
+            // 
+            this.lblServiceInstalled.AutoSize = true;
+            this.lblServiceInstalled.Location = new System.Drawing.Point(44, 70);
+            this.lblServiceInstalled.Name = "lblServiceInstalled";
+            this.lblServiceInstalled.Size = new System.Drawing.Size(49, 13);
+            this.lblServiceInstalled.TabIndex = 9;
+            this.lblServiceInstalled.Text = "Installed:";
+            // 
+            // txtServiceInstalledVersion
+            // 
+            this.txtServiceInstalledVersion.Location = new System.Drawing.Point(99, 122);
+            this.txtServiceInstalledVersion.Name = "txtServiceInstalledVersion";
+            this.txtServiceInstalledVersion.ReadOnly = true;
+            this.txtServiceInstalledVersion.Size = new System.Drawing.Size(100, 20);
+            this.txtServiceInstalledVersion.TabIndex = 12;
+            // 
+            // lblServiceInstalledVersion
+            // 
+            this.lblServiceInstalledVersion.AutoSize = true;
+            this.lblServiceInstalledVersion.Location = new System.Drawing.Point(6, 122);
+            this.lblServiceInstalledVersion.Name = "lblServiceInstalledVersion";
+            this.lblServiceInstalledVersion.Size = new System.Drawing.Size(87, 13);
+            this.lblServiceInstalledVersion.TabIndex = 11;
+            this.lblServiceInstalledVersion.Text = "Installed Version:";
+            // 
+            // txtServiceInstalledPath
+            // 
+            this.txtServiceInstalledPath.Location = new System.Drawing.Point(99, 148);
+            this.txtServiceInstalledPath.Name = "txtServiceInstalledPath";
+            this.txtServiceInstalledPath.ReadOnly = true;
+            this.txtServiceInstalledPath.Size = new System.Drawing.Size(215, 20);
+            this.txtServiceInstalledPath.TabIndex = 14;
+            // 
+            // lblServiceInstalledPath
+            // 
+            this.lblServiceInstalledPath.AutoSize = true;
+            this.lblServiceInstalledPath.Location = new System.Drawing.Point(19, 148);
+            this.lblServiceInstalledPath.Name = "lblServiceInstalledPath";
+            this.lblServiceInstalledPath.Size = new System.Drawing.Size(74, 13);
+            this.lblServiceInstalledPath.TabIndex = 13;
+            this.lblServiceInstalledPath.Text = "Installed Path:";
+            // 
             // wInstaller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(219, 305);
+            this.ClientSize = new System.Drawing.Size(376, 374);
+            this.Controls.Add(this.txtServiceInstalledPath);
+            this.Controls.Add(this.lblServiceInstalledPath);
+            this.Controls.Add(this.txtServiceInstalledVersion);
+            this.Controls.Add(this.lblServiceInstalledVersion);
+            this.Controls.Add(this.txtServiceInstalled);
+            this.Controls.Add(this.lblServiceInstalled);
             this.Controls.Add(this.txtServiceStatus);
             this.Controls.Add(this.lblServiceStatus);
             this.Controls.Add(this.btnServiceUninstall);
@@ -154,6 +217,12 @@
         private System.Windows.Forms.Button btnServiceUninstall;
         private System.Windows.Forms.TextBox txtServiceStatus;
         private System.Windows.Forms.Label lblServiceStatus;
+        private System.Windows.Forms.TextBox txtServiceInstalled;
+        private System.Windows.Forms.Label lblServiceInstalled;
+        private System.Windows.Forms.TextBox txtServiceInstalledVersion;
+        private System.Windows.Forms.Label lblServiceInstalledVersion;
+        private System.Windows.Forms.TextBox txtServiceInstalledPath;
+        private System.Windows.Forms.Label lblServiceInstalledPath;
     }
 }
 
