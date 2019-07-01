@@ -165,6 +165,7 @@ namespace ServicesInstaller
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.ToString());
                 _serviceInstalledVersion = "";
                 _serviceInstalledStatus = "";
                 _serviceInstalledPath = "";

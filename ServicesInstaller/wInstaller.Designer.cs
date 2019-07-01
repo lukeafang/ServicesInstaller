@@ -43,6 +43,7 @@
             this.lblServiceInstalledVersion = new System.Windows.Forms.Label();
             this.txtServiceInstalledPath = new System.Windows.Forms.TextBox();
             this.lblServiceInstalledPath = new System.Windows.Forms.Label();
+            this.txtProcessOutput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblServiceName
@@ -92,7 +93,7 @@
             // 
             // btnServiceInstall
             // 
-            this.btnServiceInstall.Location = new System.Drawing.Point(19, 261);
+            this.btnServiceInstall.Location = new System.Drawing.Point(22, 185);
             this.btnServiceInstall.Name = "btnServiceInstall";
             this.btnServiceInstall.Size = new System.Drawing.Size(88, 37);
             this.btnServiceInstall.TabIndex = 5;
@@ -102,7 +103,7 @@
             // 
             // btnServiceUninstall
             // 
-            this.btnServiceUninstall.Location = new System.Drawing.Point(113, 261);
+            this.btnServiceUninstall.Location = new System.Drawing.Point(116, 185);
             this.btnServiceUninstall.Name = "btnServiceUninstall";
             this.btnServiceUninstall.Size = new System.Drawing.Size(88, 37);
             this.btnServiceUninstall.TabIndex = 6;
@@ -178,11 +179,21 @@
             this.lblServiceInstalledPath.TabIndex = 13;
             this.lblServiceInstalledPath.Text = "Installed Path:";
             // 
+            // txtProcessOutput
+            // 
+            this.txtProcessOutput.Location = new System.Drawing.Point(335, 13);
+            this.txtProcessOutput.Multiline = true;
+            this.txtProcessOutput.Name = "txtProcessOutput";
+            this.txtProcessOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtProcessOutput.Size = new System.Drawing.Size(483, 337);
+            this.txtProcessOutput.TabIndex = 15;
+            // 
             // wInstaller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(376, 374);
+            this.ClientSize = new System.Drawing.Size(841, 374);
+            this.Controls.Add(this.txtProcessOutput);
             this.Controls.Add(this.txtServiceInstalledPath);
             this.Controls.Add(this.lblServiceInstalledPath);
             this.Controls.Add(this.txtServiceInstalledVersion);
@@ -223,6 +234,7 @@
         private System.Windows.Forms.Label lblServiceInstalledVersion;
         private System.Windows.Forms.TextBox txtServiceInstalledPath;
         private System.Windows.Forms.Label lblServiceInstalledPath;
+        private System.Windows.Forms.TextBox txtProcessOutput;
     }
 }
 

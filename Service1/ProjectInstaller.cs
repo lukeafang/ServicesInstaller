@@ -23,7 +23,6 @@ namespace Service1
             this.serviceInstaller1.DisplayName = appSettings["ServiceDisplayName"];
             this.serviceInstaller1.Description = appSettings["ServiceDesc"];
 
-
             string eventSourceName = appSettings["EventSourceName"];
             string logName = appSettings["EventLogName"];
             EventLogInstaller EventLogInstall = null;

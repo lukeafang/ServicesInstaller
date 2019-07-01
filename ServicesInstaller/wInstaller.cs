@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -38,14 +40,75 @@ namespace ServicesInstaller
         {
             if (_serviceInfo == null) { return; }
 
+            string installPath = _serviceInfo.ServicePath;
 
+            using (Process process = new Process())
+            {
+                txtProcessOutput.Text = "";
+                txtProcessOutput.Text = "Starting install service...\r\n";
+
+                process.StartInfo.FileName = installPath;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.Arguments = "-install";
+                process.Start();
+
+                // Synchronously read the standard output of the spawned process. 
+                StreamReader reader = process.StandardOutput;
+                string standard_output;
+                string newOutput = "";
+                while ((standard_output = reader.ReadLine()) != null)
+                {
+                    newOutput = "\r\n" + standard_output;
+                    txtProcessOutput.AppendText(newOutput);
+                }
+
+                // Write the redirected output to this application's window.
+                //Console.WriteLine(output);
+                //txtProcessOutput.Text = output;
+
+                process.WaitForExit();
+            }
+
+            //reload service info to check is installed or not
+            updateUIValue();
         }
 
         private void btnServiceUninstall_Click(object sender, EventArgs e)
         {
             if (_serviceInfo == null) { return; }
+            if (_serviceInfo.IsInstalled == false) { return; }
 
+            string installedPath = _serviceInfo.ServiceInstalledPath;
 
+            using (Process process = new Process())
+            {
+                txtProcessOutput.Text = "";
+                txtProcessOutput.Text = "Starting uninstall service...\r\n";
+
+                process.StartInfo.FileName = installedPath;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.Arguments = "-uninstall";
+                process.Start();
+
+                // Synchronously read the standard output of the spawned process. 
+                StreamReader reader = process.StandardOutput;
+                string standard_output;
+                string newOutput = "";
+                while ((standard_output = reader.ReadLine()) != null)
+                {
+                    newOutput = "\r\n" + standard_output;
+                    txtProcessOutput.AppendText(newOutput);
+                }
+
+                process.WaitForExit();
+            }
+
+            //reload service info to check is installed or not
+            updateUIValue();
         }
 
         private void wInstaller_Shown(object sender, EventArgs e)
