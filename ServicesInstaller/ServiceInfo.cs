@@ -50,6 +50,20 @@ namespace ServicesInstaller
         }
         private string _servicePath;
 
+        public string EventSourceName
+        {
+            get { return _eventSourceName; }
+            set { _eventSourceName = value; }
+        }
+        private string _eventSourceName;
+
+        public string EventLogName
+        {
+            get { return _eventLogName; }
+            set { _eventLogName = value; }
+        }
+        private string _eventLogName;
+
         //Service registed path, if service is installed, store installed path here
         public string ServiceInstalledPath
         {
@@ -131,6 +145,13 @@ namespace ServicesInstaller
 
             keyValueConfigElement = section.Settings["ServiceDesc"];
             _serviceDesc = keyValueConfigElement.Value;
+
+            keyValueConfigElement = section.Settings["EventSourceName"];
+            _eventSourceName = keyValueConfigElement.Value;
+
+            keyValueConfigElement = section.Settings["EventLogName"];
+            _eventLogName = keyValueConfigElement.Value;
+
 
             //check service installed or not
             try

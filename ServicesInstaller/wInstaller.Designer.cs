@@ -47,6 +47,8 @@
             this.btnStopService = new System.Windows.Forms.Button();
             this.btnStartService = new System.Windows.Forms.Button();
             this.btnRestartService = new System.Windows.Forms.Button();
+            this.btnReadEventLog = new System.Windows.Forms.Button();
+            this.btnClearEventLog = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblServiceName
@@ -221,11 +223,33 @@
             this.btnRestartService.UseVisualStyleBackColor = true;
             this.btnRestartService.Click += new System.EventHandler(this.btnRestartService_Click);
             // 
+            // btnReadEventLog
+            // 
+            this.btnReadEventLog.Location = new System.Drawing.Point(22, 285);
+            this.btnReadEventLog.Name = "btnReadEventLog";
+            this.btnReadEventLog.Size = new System.Drawing.Size(88, 37);
+            this.btnReadEventLog.TabIndex = 19;
+            this.btnReadEventLog.Text = "Read Log";
+            this.btnReadEventLog.UseVisualStyleBackColor = true;
+            this.btnReadEventLog.Click += new System.EventHandler(this.btnReadEventLog_Click);
+            // 
+            // btnClearEventLog
+            // 
+            this.btnClearEventLog.Location = new System.Drawing.Point(116, 285);
+            this.btnClearEventLog.Name = "btnClearEventLog";
+            this.btnClearEventLog.Size = new System.Drawing.Size(88, 37);
+            this.btnClearEventLog.TabIndex = 20;
+            this.btnClearEventLog.Text = "Clear Log";
+            this.btnClearEventLog.UseVisualStyleBackColor = true;
+            this.btnClearEventLog.Click += new System.EventHandler(this.btnClearEventLog_Click);
+            // 
             // wInstaller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(841, 374);
+            this.Controls.Add(this.btnClearEventLog);
+            this.Controls.Add(this.btnReadEventLog);
             this.Controls.Add(this.btnRestartService);
             this.Controls.Add(this.btnStopService);
             this.Controls.Add(this.btnStartService);
@@ -274,6 +298,8 @@
         private System.Windows.Forms.Button btnStopService;
         private System.Windows.Forms.Button btnStartService;
         private System.Windows.Forms.Button btnRestartService;
+        private System.Windows.Forms.Button btnReadEventLog;
+        private System.Windows.Forms.Button btnClearEventLog;
     }
 }
 

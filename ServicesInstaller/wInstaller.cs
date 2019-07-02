@@ -312,5 +312,51 @@ namespace ServicesInstaller
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void btnReadEventLog_Click(object sender, EventArgs e)
+        {
+            string eventSourceName = _serviceInfo.EventSourceName;
+            string eventLogName = _serviceInfo.EventLogName;
+
+            if (System.Diagnostics.EventLog.SourceExists(eventSourceName) == false) 
+            {
+                MessageBox.Show("Not Exist Log in system.");
+                return; 
+            }
+            txtProcessOutput.Text = "";
+
+            EventLog eventLog1 = new System.Diagnostics.EventLog();
+            eventLog1.Source = eventSourceName;
+            eventLog1.Log = eventLogName;
+
+            EventLogEntryCollection entries = eventLog1.Entries;          
+
+            foreach (System.Diagnostics.EventLogEntry entry in entries)
+            {
+                string msg = string.Format("{0} : {1}\n", entry.TimeWritten, entry.Message);
+                txtProcessOutput.AppendText(msg);
+            }
+        }
+
+        private void btnClearEventLog_Click(object sender, EventArgs e)
+        {
+            string eventSourceName = _serviceInfo.EventSourceName;
+            string eventLogName = _serviceInfo.EventLogName;
+
+            if (System.Diagnostics.EventLog.SourceExists(eventSourceName) == false)
+            {
+                MessageBox.Show("Not Exist Log in system.");
+                return;
+            }
+
+            EventLog eventLog1 = new System.Diagnostics.EventLog();
+            eventLog1.Source = eventSourceName;
+            eventLog1.Log = eventLogName;
+            eventLog1.Clear();
+            txtProcessOutput.Text = "";
+            MessageBox.Show("Event Log Clear");
+        }
+
+
     }
 }
