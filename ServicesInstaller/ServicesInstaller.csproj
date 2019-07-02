@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ServiceInfo.cs" />
+    <Compile Include="ServiceInstallWorker.cs" />
     <Compile Include="wInstaller.cs">
       <SubType>Form</SubType>
     </Compile>

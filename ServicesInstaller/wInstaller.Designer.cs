@@ -44,6 +44,9 @@
             this.txtServiceInstalledPath = new System.Windows.Forms.TextBox();
             this.lblServiceInstalledPath = new System.Windows.Forms.Label();
             this.txtProcessOutput = new System.Windows.Forms.TextBox();
+            this.btnStopService = new System.Windows.Forms.Button();
+            this.btnStartService = new System.Windows.Forms.Button();
+            this.btnRestartService = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblServiceName
@@ -188,11 +191,44 @@
             this.txtProcessOutput.Size = new System.Drawing.Size(483, 337);
             this.txtProcessOutput.TabIndex = 15;
             // 
+            // btnStopService
+            // 
+            this.btnStopService.Location = new System.Drawing.Point(209, 233);
+            this.btnStopService.Name = "btnStopService";
+            this.btnStopService.Size = new System.Drawing.Size(88, 37);
+            this.btnStopService.TabIndex = 17;
+            this.btnStopService.Text = "Stop";
+            this.btnStopService.UseVisualStyleBackColor = true;
+            this.btnStopService.Click += new System.EventHandler(this.btnStopService_Click);
+            // 
+            // btnStartService
+            // 
+            this.btnStartService.Location = new System.Drawing.Point(115, 233);
+            this.btnStartService.Name = "btnStartService";
+            this.btnStartService.Size = new System.Drawing.Size(88, 37);
+            this.btnStartService.TabIndex = 16;
+            this.btnStartService.Text = "Start";
+            this.btnStartService.UseVisualStyleBackColor = true;
+            this.btnStartService.Click += new System.EventHandler(this.btnStartService_Click);
+            // 
+            // btnRestartService
+            // 
+            this.btnRestartService.Location = new System.Drawing.Point(21, 233);
+            this.btnRestartService.Name = "btnRestartService";
+            this.btnRestartService.Size = new System.Drawing.Size(88, 37);
+            this.btnRestartService.TabIndex = 18;
+            this.btnRestartService.Text = "Restart";
+            this.btnRestartService.UseVisualStyleBackColor = true;
+            this.btnRestartService.Click += new System.EventHandler(this.btnRestartService_Click);
+            // 
             // wInstaller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(841, 374);
+            this.Controls.Add(this.btnRestartService);
+            this.Controls.Add(this.btnStopService);
+            this.Controls.Add(this.btnStartService);
             this.Controls.Add(this.txtProcessOutput);
             this.Controls.Add(this.txtServiceInstalledPath);
             this.Controls.Add(this.lblServiceInstalledPath);
@@ -235,6 +271,9 @@
         private System.Windows.Forms.TextBox txtServiceInstalledPath;
         private System.Windows.Forms.Label lblServiceInstalledPath;
         private System.Windows.Forms.TextBox txtProcessOutput;
+        private System.Windows.Forms.Button btnStopService;
+        private System.Windows.Forms.Button btnStartService;
+        private System.Windows.Forms.Button btnRestartService;
     }
 }
 
